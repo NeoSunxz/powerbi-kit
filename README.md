@@ -22,7 +22,7 @@ powerbi-kit/
 
 ## 主题怎么导入
 
-Power BI Desktop → 视图 → 主题 → 浏览主题，选 `themes/` 里的 .json。
+Power BI Desktop → 设计 → 导入主题，选 `themes/` 里的 .json（老版本：视图 → 主题 → 浏览主题）。
 页面底色在「自定义主题 → 页面」里改：燕麦拿铁 `#EFEBE5`，墨绿鎏金 `#0E1916`，雾霾蓝 `#EAEEF3`。
 
 ## 更新
