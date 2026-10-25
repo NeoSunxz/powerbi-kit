@@ -1,0 +1,15 @@
+{
+  "name": "墨绿鎏金",
+  "dataColors": [
+    "#A4802B",
+    "#257DA9",
+    "#A75F3D",
+    "#8B79BF",
+    "#107C5A",
+    "#839D53"
+  ],
+  "foreground": "#EDE6D6",
+  "secondLevelElements": "#8FA39B",
+  "background": "#15231F",
+  "tableAccent": "#A4802B"
+}

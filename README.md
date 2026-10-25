@@ -1,0 +1,34 @@
+# powerbi-kit
+
+让 AI 直接在 Power BI 里干活的个人工具包：MCP 配置说明、做报表的 skill、配色主题、示例数据。
+
+> 个人项目。只放示例数据和公开数据，不放任何工作文件。
+
+## 里面有什么
+
+```
+powerbi-kit/
+├─ docs/setup.md            在 Windows 上配好 Power BI MCP（Claude Code / WorkBuddy / DeepSeek harness）
+├─ skills/neo-powerbi/      做报表的规矩：先只读、改前备份、命名格式、改完核数、汇报格式
+├─ themes/                  3 套 Power BI 主题：oat-latte 燕麦拿铁 / forest-gold 墨绿鎏金 / mist-blue 雾霾蓝
+└─ sample-data/             国家统计局 CPI 和居民收入（2016–2026）
+```
+
+## 怎么开始
+
+1. 照 [docs/setup.md](docs/setup.md) 装好 Node.js，接上 Power BI MCP。
+2. 把 `skills/neo-powerbi` 复制到 AI 工具的 skills 目录（Claude Code：`%USERPROFILE%\.claude\skills\`）。
+3. 用 `sample-data` 里的 CSV 建个演示文件，按 setup.md 第 4 步测一遍。
+
+## 主题怎么导入
+
+Power BI Desktop → 视图 → 主题 → 浏览主题，选 `themes/` 里的 .json。
+页面底色在「自定义主题 → 页面」里改：燕麦拿铁 `#EFEBE5`，墨绿鎏金 `#0E1916`，雾霾蓝 `#EAEEF3`。
+
+## 更新
+
+```powershell
+cd $HOME\powerbi-kit
+git pull
+Copy-Item -Recurse -Force skills\neo-powerbi $HOME\.claude\skills\
+```

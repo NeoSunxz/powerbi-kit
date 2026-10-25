@@ -1,0 +1,6 @@
+*.pbix
+*.pbit
+.pbi/
+~$*
+.DS_Store
+Thumbs.db

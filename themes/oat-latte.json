@@ -1,0 +1,14 @@
+{
+  "name": "燕麦拿铁",
+  "dataColors": [
+    "#2A669F",
+    "#CB9054",
+    "#A95960",
+    "#B9A452",
+    "#6D5496",
+    "#4AA076"
+  ],
+  "foreground": "#2D2A26",
+  "background": "#FBF9F6",
+  "tableAccent": "#2A669F"
+}

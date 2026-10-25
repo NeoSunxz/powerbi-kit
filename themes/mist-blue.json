@@ -1,0 +1,14 @@
+{
+  "name": "雾霾蓝",
+  "dataColors": [
+    "#3A5C9B",
+    "#06999A",
+    "#C8AB5B",
+    "#965582",
+    "#DB8F6C",
+    "#715293"
+  ],
+  "foreground": "#1B2433",
+  "background": "#FFFFFF",
+  "tableAccent": "#3A5C9B"
+}
