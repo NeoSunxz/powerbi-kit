@@ -6,13 +6,13 @@
     "visualClassName": "Visual",
     "version": "1.0.0.0",
     "description": "按天显示数值的日历热力图：一行一年，一格一天，颜色越深数值越大。支持点选交叉筛选和 Power BI 原生提示框。不联网、不收集数据。",
-    "supportUrl": "https://example.com/neo-calendar-heatmap",
-    "gitHubUrl": ""
+    "supportUrl": "https://github.com/NeoSunxz/powerbi-kit",
+    "gitHubUrl": "https://github.com/NeoSunxz/powerbi-kit"
   },
   "apiVersion": "5.11.1",
   "author": {
     "name": "NeoSun",
-    "email": "neo.kenshuju@example.com"
+    "email": "44791984+NeoSunxz@users.noreply.github.com"
   },
   "assets": {
     "icon": "assets/icon.png"

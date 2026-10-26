@@ -14,4 +14,4 @@ npm install
 npx pbiviz package          # 输出在 dist/
 ```
 
-需要 Node.js 18+。`pbiviz.json` 里的作者邮箱和 supportUrl 目前是占位，正式发布前要改。
+需要 Node.js 18+。`pbiviz.json` 里的作者邮箱用 GitHub noreply 地址，supportUrl 指向本仓库。
