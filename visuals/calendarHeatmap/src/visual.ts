@@ -20,6 +20,7 @@ import ISelectionManager = powerbi.extensibility.ISelectionManager;
 import ISelectionId = powerbi.visuals.ISelectionId;
 
 import { VisualFormattingSettingsModel } from "./settings";
+import ISandboxExtendedColorPalette = powerbi.extensibility.ISandboxExtendedColorPalette;
 
 interface DayPoint {
     date: Date;
@@ -33,6 +34,11 @@ const WEEKDAYS = ["日", "一", "二", "三", "四", "五", "六"];
 function dayKey(d: Date): string {
     const m = d.getMonth() + 1, day = d.getDate();
     return `${d.getFullYear()}-${m < 10 ? "0" : ""}${m}-${day < 10 ? "0" : ""}${day}`;
+}
+
+const numberFormat = new Intl.NumberFormat("zh-CN", { maximumFractionDigits: 2 });
+function formatValue(v: number): string {
+    return numberFormat.format(v);
 }
 
 function toDate(v: powerbi.PrimitiveValue): Date | null {
@@ -75,6 +81,7 @@ export class Visual implements IVisual {
         try {
             const dv = options.dataViews && options.dataViews[0];
             this.formattingSettings = this.formattingSettingsService.populateFormattingSettingsModel(VisualFormattingSettingsModel, dv);
+            this.syncSliceVisibility();
             const points = this.readData(dv);
             this.svg.selectAll("*").remove();
             if (!points) {
@@ -89,6 +96,31 @@ export class Visual implements IVisual {
         } catch (error) {
             this.events.renderingFailed(options, String(error));
         }
+    }
+
+    // 跟随主题时藏起取色器；图例选「文字」时才显示两端文字
+    private syncSliceVisibility() {
+        const c = this.formattingSettings.colorsCard, l = this.formattingSettings.legendCard;
+        [c.lowColor, c.highColor, c.emptyColor].forEach(x => x.visible = !c.useTheme.value);
+        const textLabels = l.labelType.value.value === "text";
+        l.lowText.visible = textLabels;
+        l.highText.visible = textLabels;
+    }
+
+    // 高对比度模式用系统前景/背景色；跟随主题时最大值取主题第一个数据颜色
+    private resolveColors() {
+        const s = this.formattingSettings;
+        const pal = this.host.colorPalette as ISandboxExtendedColorPalette;
+        if (pal.isHighContrast) {
+            const fg = pal.foreground.value, bg = pal.background.value;
+            return { low: bg, high: fg, empty: bg, text: fg };
+        }
+        const text = s.textCard.color.value.value;
+        if (s.colorsCard.useTheme.value) {
+            const high = pal.getColor("calendarHeatmap").value;
+            return { low: d3.interpolateLab("#FFFFFF", high)(0.12), high, empty: "#F3F2F1", text };
+        }
+        return { low: s.colorsCard.lowColor.value.value, high: s.colorsCard.highColor.value.value, empty: s.colorsCard.emptyColor.value.value, text };
     }
 
     private showMessage(text: string) {
@@ -116,13 +148,19 @@ export class Visual implements IVisual {
     private render(points: DayPoint[], width: number, height: number) {
         const s = this.formattingSettings;
         const start = s.layoutCard.mondayFirst.value ? 1 : 0;
-        const font = s.layoutCard.fontSize.value;
+        const tf = s.textCard.font;
+        const font = tf.fontSize.value;
+        const colors = this.resolveColors();
+        const lg = s.legendCard;
+        const legendFont = lg.fontSize.value;
+        const legendH = lg.show.value ? Math.max(lg.boxSize.value, legendFont * 1.3) + 8 : 0;
+        const legendTop = lg.show.value && String(lg.position.value.value).startsWith("top");
         const showMonths = s.layoutCard.showMonths.value;
         const byKey = new Map(points.map(p => [p.key, p]));
         const years = Array.from(new Set(points.map(p => p.date.getFullYear()))).sort((a, b) => a - b);
 
-        // 版面：左边留星期，每年上面一行放年份（左上角）和月份，下面留图例；格子保持正方形
-        const left = font * 4.2, right = 8, top = 4, legendH = font * 2.4;
+        // 版面：左边留星期，每年上面一行放年份（左上角）和月份，图例在上或在下；格子保持正方形
+        const left = font * 4.2, right = 8, top = 4 + (legendTop ? legendH : 0);
         const headH = font * 1.6, yearGap = font * 1.2;
         const cellW = (width - left - right) / 53;
         const cellH = (height - top - legendH - years.length * (headH + yearGap)) / (years.length * 7);
@@ -132,12 +170,15 @@ export class Visual implements IVisual {
 
         const values = points.map(p => p.value);
         const lo = d3.min(values), hi = d3.max(values);
-        const color = d3.scaleSequential(d3.interpolateLab(s.colorsCard.lowColor.value.value, s.colorsCard.highColor.value.value))
+        const color = d3.scaleSequential(d3.interpolateLab(colors.low, colors.high))
             .domain(lo === hi ? [lo - 1, hi] : [lo, hi]);
-        const emptyColor = s.colorsCard.emptyColor.value.value;
+        const emptyColor = colors.empty;
         const radius = Math.min(s.layoutCard.cornerRadius.value, cell / 2);
 
-        this.svg.attr("width", width).attr("height", height);
+        this.svg.attr("width", width).attr("height", height)
+            .style("font-family", tf.fontFamily.value)
+            .style("font-weight", tf.bold.value ? "bold" : "normal")
+            .style("fill", colors.text);
         const g = this.svg.append("g").attr("transform", `translate(${left},${top})`);
 
         years.forEach((year, yi) => {
@@ -171,18 +212,17 @@ export class Visual implements IVisual {
         });
 
         this.bindInteractions();
-        this.drawLegend(color, lo, hi, width, height, font, cell);
+        if (lg.show.value) this.drawLegend(color, lo, hi, width, height, legendH);
         this.applySelection();
     }
 
     private bindInteractions() {
-        const fmt = new Intl.NumberFormat("zh-CN", { maximumFractionDigits: 2 });
         const tooltip = (event: MouseEvent, p: DayPoint) => ({
             coordinates: [event.clientX, event.clientY],
             isTouchEvent: false,
             dataItems: [
                 { displayName: "日期", value: `${p.key} 周${WEEKDAYS[p.date.getDay()]}` },
-                { displayName: "数值", value: fmt.format(p.value) }
+                { displayName: "数值", value: formatValue(p.value) }
             ],
             identities: [p.selectionId]
         });
@@ -210,17 +250,28 @@ export class Visual implements IVisual {
     }
 
     private drawLegend(color: d3.ScaleSequential<string>, lo: number, hi: number,
-        width: number, height: number, font: number, cell: number) {
-        const n = 5, size = Math.max(8, Math.min(cell, 14)), y = height - size - 4;
-        const lg = this.svg.append("g").classed("legend", true);
-        const x0 = width - 8 - n * (size + 2) - font * 1.6;
-        lg.append("text").attr("x", x0 - 4).attr("y", y + size / 2).attr("font-size", font * 0.9)
-            .attr("text-anchor", "end").attr("dominant-baseline", "middle").text("少");
-        d3.range(n).forEach(i => lg.append("rect")
-            .attr("x", x0 + i * (size + 2)).attr("y", y).attr("width", size).attr("height", size).attr("rx", 2)
-            .attr("fill", color(lo + (hi - lo) * i / (n - 1))));
-        lg.append("text").attr("x", x0 + n * (size + 2) + 2).attr("y", y + size / 2).attr("font-size", font * 0.9)
-            .attr("dominant-baseline", "middle").text("多");
+        width: number, height: number, legendH: number) {
+        const l = this.formattingSettings.legendCard;
+        const n = Math.max(2, Math.min(10, Math.round(l.steps.value)));
+        const size = Math.max(6, l.boxSize.value), font = l.fontSize.value, pad = 2;
+        const pos = String(l.position.value.value);
+        const useValues = l.labelType.value.value === "values";
+        const lowLabel = useValues ? formatValue(lo) : l.lowText.value;
+        const highLabel = useValues ? formatValue(hi) : l.highText.value;
+
+        const g = this.svg.append("g").classed("legend", true).attr("font-size", font);
+        const lowText = g.append("text").attr("dominant-baseline", "middle").text(lowLabel);
+        const lowW = lowText.node().getComputedTextLength();
+        const boxesX = lowW + 6;
+        d3.range(n).forEach(i => g.append("rect")
+            .attr("x", boxesX + i * (size + pad)).attr("y", -size / 2).attr("width", size).attr("height", size)
+            .attr("rx", Math.min(3, size / 4)).attr("fill", color(lo + (hi - lo) * i / (n - 1))));
+        const highText = g.append("text").attr("x", boxesX + n * (size + pad) + 4).attr("dominant-baseline", "middle").text(highLabel);
+        const totalW = boxesX + n * (size + pad) + 4 + highText.node().getComputedTextLength();
+
+        const x = pos.endsWith("Right") ? width - 8 - totalW : 8;
+        const y = pos.startsWith("top") ? 4 + legendH / 2 - 4 : height - legendH / 2;
+        g.attr("transform", `translate(${x},${y})`);
     }
 
     public getFormattingModel(): powerbi.visuals.FormattingModel {

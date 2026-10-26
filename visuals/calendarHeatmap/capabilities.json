@@ -49,6 +49,11 @@
     "objects": {
         "colors": {
             "properties": {
+                "useTheme": {
+                    "type": {
+                        "bool": true
+                    }
+                },
                 "lowColor": {
                     "type": {
                         "fill": {
@@ -93,6 +98,103 @@
                 "cornerRadius": {
                     "type": {
                         "numeric": true
+                    }
+                }
+            }
+        },
+        "text": {
+            "properties": {
+                "fontFamily": {
+                    "type": {
+                        "formatting": {
+                            "fontFamily": true
+                        }
+                    }
+                },
+                "fontSize": {
+                    "type": {
+                        "formatting": {
+                            "fontSize": true
+                        }
+                    }
+                },
+                "bold": {
+                    "type": {
+                        "bool": true
+                    }
+                },
+                "color": {
+                    "type": {
+                        "fill": {
+                            "solid": {
+                                "color": true
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "legend": {
+            "properties": {
+                "show": {
+                    "type": {
+                        "bool": true
+                    }
+                },
+                "position": {
+                    "type": {
+                        "enumeration": [
+                            {
+                                "value": "bottomRight",
+                                "displayName": "右下"
+                            },
+                            {
+                                "value": "bottomLeft",
+                                "displayName": "左下"
+                            },
+                            {
+                                "value": "topRight",
+                                "displayName": "右上"
+                            },
+                            {
+                                "value": "topLeft",
+                                "displayName": "左上"
+                            }
+                        ]
+                    }
+                },
+                "labelType": {
+                    "type": {
+                        "enumeration": [
+                            {
+                                "value": "text",
+                                "displayName": "文字（少 / 多）"
+                            },
+                            {
+                                "value": "values",
+                                "displayName": "最小值 / 最大值"
+                            }
+                        ]
+                    }
+                },
+                "lowText": {
+                    "type": {
+                        "text": true
+                    }
+                },
+                "highText": {
+                    "type": {
+                        "text": true
+                    }
+                },
+                "boxSize": {
+                    "type": {
+                        "numeric": true
+                    }
+                },
+                "steps": {
+                    "type": {
+                        "integer": true
                     }
                 },
                 "fontSize": {
