@@ -5,3 +5,7 @@
 .DS_Store
 Thumbs.db
 release/
+
+# 只在本地，不上 GitHub
+docs/styling-research.md
+.vscode/
