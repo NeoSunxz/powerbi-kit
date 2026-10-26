@@ -121,14 +121,14 @@ export class Visual implements IVisual {
         const byKey = new Map(points.map(p => [p.key, p]));
         const years = Array.from(new Set(points.map(p => p.date.getFullYear()))).sort((a, b) => a - b);
 
-        // 版面：左边留星期和年份，上面留月份，下面留图例；格子保持正方形
+        // 版面：左边留星期，每年上面一行放年份（左上角）和月份，下面留图例；格子保持正方形
         const left = font * 4.2, right = 8, top = 4, legendH = font * 2.4;
-        const monthH = showMonths ? font * 1.6 : 0, yearGap = font * 1.2;
+        const headH = font * 1.6, yearGap = font * 1.2;
         const cellW = (width - left - right) / 53;
-        const cellH = (height - top - legendH - years.length * (monthH + yearGap)) / (years.length * 7);
+        const cellH = (height - top - legendH - years.length * (headH + yearGap)) / (years.length * 7);
         const cell = Math.max(2, Math.min(cellW, cellH));
         const gap = Math.max(1, cell * 0.12);
-        const blockH = monthH + cell * 7 + yearGap;
+        const blockH = headH + cell * 7 + yearGap;
 
         const values = points.map(p => p.value);
         const lo = d3.min(values), hi = d3.max(values);
@@ -149,19 +149,19 @@ export class Visual implements IVisual {
             const row = (d: Date) => (d.getDay() - start + 7) % 7;
 
             yg.append("text").classed("year", true)
-                .attr("x", -left + 2).attr("y", monthH + cell * 3.5)
-                .attr("font-size", font).attr("dominant-baseline", "middle").text(String(year));
+                .attr("x", -left + 2).attr("y", headH - font * 0.4)
+                .attr("font-size", font).attr("font-weight", "bold").text(String(year));
             [0, 2, 4].forEach(r => yg.append("text").classed("weekday", true)
-                .attr("x", -4).attr("y", monthH + r * cell + cell / 2)
+                .attr("x", -4).attr("y", headH + r * cell + cell / 2)
                 .attr("font-size", font * 0.9).attr("text-anchor", "end").attr("dominant-baseline", "middle")
                 .text(WEEKDAYS[(r + start) % 7]));
             if (showMonths) {
                 d3.timeMonths(jan1, new Date(year + 1, 0, 1)).forEach(m => yg.append("text").classed("month", true)
-                    .attr("x", col(m) * cell).attr("y", monthH - font * 0.4)
+                    .attr("x", col(m) * cell).attr("y", headH - font * 0.4)
                     .attr("font-size", font * 0.9).text(`${m.getMonth() + 1}月`));
             }
 
-            yg.append("g").attr("transform", `translate(0,${monthH})`)
+            yg.append("g").attr("transform", `translate(0,${headH})`)
                 .selectAll("rect").data(days.map(d => byKey.get(dayKey(d)) || null).map((p, i) => ({ p, d: days[i] })))
                 .enter().append("rect")
                 .attr("x", x => col(x.d) * cell + gap / 2).attr("y", x => row(x.d) * cell + gap / 2)
