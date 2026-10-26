@@ -11,5 +11,46 @@
   "foreground": "#EDE6D6",
   "secondLevelElements": "#8FA39B",
   "background": "#15231F",
-  "tableAccent": "#A4802B"
+  "tableAccent": "#A4802B",
+  "visualStyles": {
+    "page": {
+      "*": {
+        "background": [
+          {
+            "color": {
+              "solid": {
+                "color": "#0E1916"
+              }
+            },
+            "transparency": 0
+          }
+        ],
+        "outspace": [
+          {
+            "color": {
+              "solid": {
+                "color": "#0E1916"
+              }
+            },
+            "transparency": 0
+          }
+        ]
+      }
+    },
+    "*": {
+      "*": {
+        "background": [
+          {
+            "show": true,
+            "color": {
+              "solid": {
+                "color": "#15231F"
+              }
+            },
+            "transparency": 0
+          }
+        ]
+      }
+    }
+  }
 }

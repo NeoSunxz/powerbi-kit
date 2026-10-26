@@ -35,7 +35,7 @@ The visual draws one row per year and one cell per day; darker means a higher va
 ## Importing a theme
 
 Power BI Desktop → Design → Import theme, and pick a `.json` from `themes/` (older versions: View → Themes → Browse for themes).
-Set the page background under Customize current theme → Page: oat-latte `#EFEBE5`, forest-gold `#0E1916`, mist-blue `#EAEEF3`.
+Each theme also sets the canvas background, the wallpaper and the visual background (oat-latte `#EFEBE5`, forest-gold `#0E1916`, mist-blue `#EAEEF3`). A page or visual whose background was already set by hand keeps that setting; select it and use Reset to default to pick up the theme.
 
 ## Updating
 
