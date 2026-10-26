@@ -11,6 +11,8 @@ powerbi-kit/
 ├─ docs/setup.md            在 Windows 上配好 Power BI MCP（Claude Code / WorkBuddy / DeepSeek harness）
 ├─ skills/neo-powerbi/      做报表的规矩：先只读、改前备份、命名格式、改完核数、汇报格式
 ├─ themes/                  3 套 Power BI 主题：oat-latte 燕麦拿铁 / forest-gold 墨绿鎏金 / mist-blue 雾霾蓝
+├─ visuals/                 自定义组件源码：calendarHeatmap 日历热力图
+├─ downloads/               打包好的组件，下载就能导入
 └─ sample-data/             虚构的咖啡店销售数据（2024–2025），演示专用
 ```
 
@@ -19,6 +21,10 @@ powerbi-kit/
 1. 照 [docs/setup.md](docs/setup.md) 装好 Node.js，接上 Power BI MCP。
 2. 把 `skills/neo-powerbi` 复制到 AI 工具的 skills 目录（Claude Code：`%USERPROFILE%\.claude\skills\`）。
 3. 用 `sample-data` 里的 3 张表建个演示文件，按 setup.md 第 4 步测一遍。
+
+## 组件怎么导入
+
+下载 [downloads/calendar-heatmap.pbiviz](downloads/calendar-heatmap.pbiviz)，Power BI Desktop → 可视化窗格「…」→ 从文件导入视觉对象。用法见 [downloads/README.md](downloads/README.md)。
 
 ## 主题怎么导入
 
