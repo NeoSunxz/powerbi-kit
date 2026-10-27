@@ -4,7 +4,7 @@
     "displayName": "日历热力图 Calendar Heatmap",
     "guid": "calendarHeatmap0F02F030DEF64A70A1A5B3A7AEDEC84A",
     "visualClassName": "Visual",
-    "version": "1.1.1.0",
+    "version": "1.1.2.0",
     "description": "按天显示数值的日历热力图：一行一年，一格一天，颜色越深数值越大。支持点选交叉筛选和 Power BI 原生提示框。不联网、不收集数据。",
     "supportUrl": "https://github.com/NeoSunxz/powerbi-kit",
     "gitHubUrl": "https://github.com/NeoSunxz/powerbi-kit"
@@ -22,5 +22,5 @@
   "capabilities": "capabilities.json",
   "dependencies": null,
   "stringResources": [],
-  "version": "1.1.1.0"
+  "version": "1.1.2.0"
 }

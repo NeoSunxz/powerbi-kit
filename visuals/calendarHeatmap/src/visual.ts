@@ -120,8 +120,20 @@ export class Visual implements IVisual {
         const themeText = pal.foregroundNeutralSecondary || pal.foreground;
         const text = s.textCard.useTheme.value && themeText ? themeText.value : s.textCard.color.value.value;
         if (s.colorsCard.useTheme.value) {
-            const high = pal.getColor("calendarHeatmap").value;
-            return { low: d3.interpolateLab("#FFFFFF", high)(0.12), high, empty: "#F3F2F1", text };
+            // 最小值从卡片底色往最大值走 35%，没数据的格子从底色往文字色挪 10%：深色主题下少的日子不会比多的还亮
+            const base = pal.background ? pal.background.value : "#FFFFFF";
+            const ink = pal.foreground ? pal.foreground.value : "#252423";
+            // 深色底上最大值提亮、提饱和度，像 GitHub 那样越多越亮
+            const themeHigh = pal.getColor("calendarHeatmap").value;
+            const dark = d3.hsl(base).l < 0.35;
+            let high = themeHigh;
+            if (dark) {
+                const h = d3.hsl(themeHigh);
+                h.l = Math.min(0.6, h.l + 0.14);
+                h.s = Math.max(h.s, 0.7);
+                high = h.formatHex();
+            }
+            return { low: d3.interpolateLab(base, high)(0.35), high, empty: d3.interpolateLab(base, ink)(0.1), text };
         }
         return { low: s.colorsCard.lowColor.value.value, high: s.colorsCard.highColor.value.value, empty: s.colorsCard.emptyColor.value.value, text };
     }

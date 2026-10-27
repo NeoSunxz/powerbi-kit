@@ -2,7 +2,7 @@
 
 | 文件 | 是什么 |
 |---|---|
-| `calendar-heatmap.pbiviz` | 日历热力图组件（1.1.1），源码在 [visuals/calendarHeatmap](../visuals/calendarHeatmap) |
+| `calendar-heatmap.pbiviz` | 日历热力图组件（1.1.2），源码在 [visuals/calendarHeatmap](../visuals/calendarHeatmap) |
 
 演示数据在 [sample-data](../sample-data)：虚构的咖啡店销售数据（2024–2025），3 张表。
 
