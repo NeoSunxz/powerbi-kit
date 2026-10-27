@@ -178,7 +178,8 @@ export class Visual implements IVisual {
         const left = font * 4.2, right = 8, top = 4 + (legendTop ? legendH : 0);
         const headH = font * 1.6, yearGap = font * 1.2;
         const cellW = (width - left - right) / 53;
-        const cellH = (height - top - legendH - years.length * (headH + yearGap)) / (years.length * 7);
+        const bottom = legendTop ? 0 : legendH;
+        const cellH = (height - top - bottom - years.length * (headH + yearGap)) / (years.length * 7);
         const cell = Math.max(2, Math.min(cellW, cellH));
         const gap = Math.max(1, cell * 0.12);
         const blockH = headH + cell * 7 + yearGap;
