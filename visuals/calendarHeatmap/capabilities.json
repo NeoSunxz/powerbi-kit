@@ -104,6 +104,11 @@
         },
         "text": {
             "properties": {
+                "useTheme": {
+                    "type": {
+                        "bool": true
+                    }
+                },
                 "fontFamily": {
                     "type": {
                         "formatting": {

@@ -29,8 +29,9 @@ class LayoutCard extends FormattingSettingsCard {
     slices: Array<FormattingSettingsSlice> = [this.mondayFirst, this.showMonths, this.cornerRadius];
 }
 
-// 文字：字体、字号、颜色，默认和 Power BI 自带视觉对象的标签一样
+// 文字：字体、字号、颜色；颜色默认跟随报表主题（和自带图的图例、坐标轴标签同色），关掉才显示取色器
 class TextCard extends FormattingSettingsCard {
+    useTheme = new formattingSettings.ToggleSwitch({ name: "useTheme", displayName: "颜色跟随报表主题", value: true });
     font = new formattingSettings.FontControl({
         name: "font",
         displayName: "字体",
@@ -42,7 +43,7 @@ class TextCard extends FormattingSettingsCard {
 
     name: string = "text";
     displayName: string = "文字";
-    slices: Array<FormattingSettingsSlice> = [this.font, this.color];
+    slices: Array<FormattingSettingsSlice> = [this.font, this.useTheme, this.color];
 }
 
 export const LEGEND_LABELS = [

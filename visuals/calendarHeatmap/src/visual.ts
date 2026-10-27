@@ -102,12 +102,14 @@ export class Visual implements IVisual {
     private syncSliceVisibility() {
         const c = this.formattingSettings.colorsCard, l = this.formattingSettings.legendCard;
         [c.lowColor, c.highColor, c.emptyColor].forEach(x => x.visible = !c.useTheme.value);
+        const t = this.formattingSettings.textCard;
+        t.color.visible = !t.useTheme.value;
         const textLabels = l.labelType.value.value === "text";
         l.lowText.visible = textLabels;
         l.highText.visible = textLabels;
     }
 
-    // 高对比度模式用系统前景/背景色；跟随主题时最大值取主题第一个数据颜色
+    // 高对比度模式用系统前景/背景色；跟随主题时最大值取主题第一个数据颜色，文字取主题的次要文字色
     private resolveColors() {
         const s = this.formattingSettings;
         const pal = this.host.colorPalette as ISandboxExtendedColorPalette;
@@ -115,7 +117,8 @@ export class Visual implements IVisual {
             const fg = pal.foreground.value, bg = pal.background.value;
             return { low: bg, high: fg, empty: bg, text: fg };
         }
-        const text = s.textCard.color.value.value;
+        const themeText = pal.foregroundNeutralSecondary || pal.foreground;
+        const text = s.textCard.useTheme.value && themeText ? themeText.value : s.textCard.color.value.value;
         if (s.colorsCard.useTheme.value) {
             const high = pal.getColor("calendarHeatmap").value;
             return { low: d3.interpolateLab("#FFFFFF", high)(0.12), high, empty: "#F3F2F1", text };

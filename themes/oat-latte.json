@@ -9,6 +9,7 @@
     "#4AA076"
   ],
   "foreground": "#2D2A26",
+  "secondLevelElements": "#8C857B",
   "background": "#FBF9F6",
   "tableAccent": "#2A669F",
   "visualStyles": {
