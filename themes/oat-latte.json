@@ -12,6 +12,20 @@
   "secondLevelElements": "#8C857B",
   "background": "#FBF9F6",
   "tableAccent": "#2A669F",
+  "textClasses": {
+    "callout": {
+      "color": "#2D2A26"
+    },
+    "title": {
+      "color": "#2D2A26"
+    },
+    "header": {
+      "color": "#2D2A26"
+    },
+    "label": {
+      "color": "#2D2A26"
+    }
+  },
   "visualStyles": {
     "page": {
       "*": {
@@ -48,6 +62,24 @@
               }
             },
             "transparency": 0
+          }
+        ],
+        "title": [
+          {
+            "fontColor": {
+              "solid": {
+                "color": "#2D2A26"
+              }
+            }
+          }
+        ],
+        "subTitle": [
+          {
+            "fontColor": {
+              "solid": {
+                "color": "#8C857B"
+              }
+            }
           }
         ]
       }
