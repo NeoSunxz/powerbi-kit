@@ -1,0 +1,26 @@
+{
+  "visual": {
+    "name": "bumpChart",
+    "displayName": "排名变化图 · NeoSun",
+    "guid": "bumpChart38833653EEAE46F99CD49891ADEC284A",
+    "visualClassName": "Visual",
+    "version": "1.0.0.0",
+    "description": "凹凸图：横轴是时间，纵轴是名次，每个类别一条线，谁升谁降一眼看清。默认只给名次变过的线上色，没变的留灰。支持悬停高亮、点选交叉筛选和 Power BI 原生提示框。不联网、不收集数据。",
+    "supportUrl": "https://github.com/NeoSunxz/powerbi-kit",
+    "gitHubUrl": "https://github.com/NeoSunxz/powerbi-kit"
+  },
+  "apiVersion": "5.11.1",
+  "author": {
+    "name": "NeoSun",
+    "email": "44791984+NeoSunxz@users.noreply.github.com"
+  },
+  "assets": {
+    "icon": "assets/icon.png"
+  },
+  "externalJS": null,
+  "style": "style/visual.less",
+  "capabilities": "capabilities.json",
+  "dependencies": null,
+  "stringResources": [],
+  "version": "1.0.0.0"
+}

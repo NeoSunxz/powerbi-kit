@@ -1,0 +1,204 @@
+{
+    "dataRoles": [
+        {
+            "displayName": "类别",
+            "name": "category",
+            "kind": "Grouping"
+        },
+        {
+            "displayName": "数值",
+            "name": "value",
+            "kind": "Measure"
+        }
+    ],
+    "dataViewMappings": [
+        {
+            "conditions": [
+                {
+                    "category": {
+                        "max": 1
+                    },
+                    "value": {
+                        "max": 1
+                    }
+                }
+            ],
+            "categorical": {
+                "categories": {
+                    "for": {
+                        "in": "category"
+                    },
+                    "dataReductionAlgorithm": {
+                        "top": {
+                            "count": 1000
+                        }
+                    }
+                },
+                "values": {
+                    "select": [
+                        {
+                            "bind": {
+                                "to": "value"
+                            }
+                        }
+                    ]
+                }
+            }
+        }
+    ],
+    "objects": {
+        "colors": {
+            "properties": {
+                "useTheme": {
+                    "type": {
+                        "bool": true
+                    }
+                },
+                "barColor": {
+                    "type": {
+                        "fill": {
+                            "solid": {
+                                "color": true
+                            }
+                        }
+                    }
+                },
+                "lineColor": {
+                    "type": {
+                        "fill": {
+                            "solid": {
+                                "color": true
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "threshold": {
+            "properties": {
+                "show": {
+                    "type": {
+                        "bool": true
+                    }
+                },
+                "value": {
+                    "type": {
+                        "numeric": true
+                    }
+                }
+            }
+        },
+        "layout": {
+            "properties": {
+                "maxBars": {
+                    "type": {
+                        "numeric": true
+                    }
+                },
+                "otherName": {
+                    "type": {
+                        "text": true
+                    }
+                },
+                "dimRest": {
+                    "type": {
+                        "bool": true
+                    }
+                }
+            }
+        },
+        "labels": {
+            "properties": {
+                "showValue": {
+                    "type": {
+                        "bool": true
+                    }
+                },
+                "unit": {
+                    "type": {
+                        "enumeration": [
+                            {
+                                "value": "auto",
+                                "displayName": "自动（满 1 万显示「万」）"
+                            },
+                            {
+                                "value": "none",
+                                "displayName": "原值"
+                            }
+                        ]
+                    }
+                },
+                "showCumulative": {
+                    "type": {
+                        "enumeration": [
+                            {
+                                "value": "all",
+                                "displayName": "每个点都写"
+                            },
+                            {
+                                "value": "cross",
+                                "displayName": "只写过线那个点"
+                            },
+                            {
+                                "value": "none",
+                                "displayName": "不写"
+                            }
+                        ]
+                    }
+                },
+                "showCallout": {
+                    "type": {
+                        "bool": true
+                    }
+                }
+            }
+        },
+        "text": {
+            "properties": {
+                "useTheme": {
+                    "type": {
+                        "bool": true
+                    }
+                },
+                "fontFamily": {
+                    "type": {
+                        "formatting": {
+                            "fontFamily": true
+                        }
+                    }
+                },
+                "fontSize": {
+                    "type": {
+                        "formatting": {
+                            "fontSize": true
+                        }
+                    }
+                },
+                "bold": {
+                    "type": {
+                        "bool": true
+                    }
+                },
+                "color": {
+                    "type": {
+                        "fill": {
+                            "solid": {
+                                "color": true
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "supportsHighlight": false,
+    "supportsMultiVisualSelection": true,
+    "supportsLandingPage": true,
+    "tooltips": {
+        "supportedTypes": {
+            "default": true,
+            "canvas": true
+        }
+    },
+    "privileges": []
+}

@@ -1,0 +1,26 @@
+{
+  "visual": {
+    "name": "paretoChart",
+    "displayName": "帕累托图 · NeoSun",
+    "guid": "paretoChart813ED81E08E042B89F080945475ACCF5",
+    "visualClassName": "Visual",
+    "version": "1.0.0.0",
+    "description": "按数值从高到低排的柱子加一条累计占比折线，画出 80% 线，哪几个类别撑起了八成一眼看清（二八分析、ABC 分析）。柱子和折线共用一把 0–100% 的尺。支持点选交叉筛选和 Power BI 原生提示框。不联网、不收集数据。",
+    "supportUrl": "https://github.com/NeoSunxz/powerbi-kit",
+    "gitHubUrl": "https://github.com/NeoSunxz/powerbi-kit"
+  },
+  "apiVersion": "5.11.1",
+  "author": {
+    "name": "NeoSun",
+    "email": "44791984+NeoSunxz@users.noreply.github.com"
+  },
+  "assets": {
+    "icon": "assets/icon.png"
+  },
+  "externalJS": null,
+  "style": "style/visual.less",
+  "capabilities": "capabilities.json",
+  "dependencies": null,
+  "stringResources": [],
+  "version": "1.0.0.0"
+}

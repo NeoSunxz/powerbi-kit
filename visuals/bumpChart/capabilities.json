@@ -1,0 +1,193 @@
+{
+    "dataRoles": [
+        {
+            "displayName": "类别（一条线一个）",
+            "name": "series",
+            "kind": "Grouping"
+        },
+        {
+            "displayName": "时间",
+            "name": "time",
+            "kind": "Grouping"
+        },
+        {
+            "displayName": "数值（按它排名）",
+            "name": "value",
+            "kind": "Measure"
+        }
+    ],
+    "dataViewMappings": [
+        {
+            "conditions": [
+                {
+                    "series": {
+                        "max": 1
+                    },
+                    "time": {
+                        "max": 1
+                    },
+                    "value": {
+                        "max": 1
+                    }
+                }
+            ],
+            "categorical": {
+                "categories": {
+                    "for": {
+                        "in": "time"
+                    },
+                    "dataReductionAlgorithm": {
+                        "top": {
+                            "count": 200
+                        }
+                    }
+                },
+                "values": {
+                    "group": {
+                        "by": "series",
+                        "select": [
+                            {
+                                "bind": {
+                                    "to": "value"
+                                }
+                            }
+                        ],
+                        "dataReductionAlgorithm": {
+                            "top": {
+                                "count": 30
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    ],
+    "objects": {
+        "colors": {
+            "properties": {
+                "useTheme": {
+                    "type": {
+                        "bool": true
+                    }
+                },
+                "mutedColor": {
+                    "type": {
+                        "fill": {
+                            "solid": {
+                                "color": true
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "layout": {
+            "properties": {
+                "emphasis": {
+                    "type": {
+                        "enumeration": [
+                            {
+                                "value": "changed",
+                                "displayName": "名次变过的上色，没变的灰色"
+                            },
+                            {
+                                "value": "all",
+                                "displayName": "全部上色"
+                            }
+                        ]
+                    }
+                },
+                "order": {
+                    "type": {
+                        "enumeration": [
+                            {
+                                "value": "auto",
+                                "displayName": "自动（按时间先后）"
+                            },
+                            {
+                                "value": "none",
+                                "displayName": "按字段原顺序"
+                            }
+                        ]
+                    }
+                },
+                "lineWidth": {
+                    "type": {
+                        "numeric": true
+                    }
+                },
+                "curve": {
+                    "type": {
+                        "bool": true
+                    }
+                }
+            }
+        },
+        "labels": {
+            "properties": {
+                "showStart": {
+                    "type": {
+                        "bool": true
+                    }
+                },
+                "showEnd": {
+                    "type": {
+                        "bool": true
+                    }
+                },
+                "showRankInDot": {
+                    "type": {
+                        "bool": true
+                    }
+                }
+            }
+        },
+        "text": {
+            "properties": {
+                "useTheme": {
+                    "type": {
+                        "bool": true
+                    }
+                },
+                "fontFamily": {
+                    "type": {
+                        "formatting": {
+                            "fontFamily": true
+                        }
+                    }
+                },
+                "fontSize": {
+                    "type": {
+                        "formatting": {
+                            "fontSize": true
+                        }
+                    }
+                },
+                "bold": {
+                    "type": {
+                        "bool": true
+                    }
+                },
+                "color": {
+                    "type": {
+                        "fill": {
+                            "solid": {
+                                "color": true
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "supportsHighlight": false,
+    "supportsMultiVisualSelection": true,
+    "supportsLandingPage": true,
+    "tooltips": {
+        "supportedTypes": {
+            "default": true,
+            "canvas": true
+        }
+    },
+    "privileges": []
+}

@@ -1,0 +1,28 @@
+// 颜色、字体由格式面板设置（写在元素上），这里只留布局
+.ic-cards {
+    display: grid;
+    overflow-y: auto;
+    overflow-x: hidden;
+    box-sizing: border-box;
+    .ic-card { position: relative; display: flex; flex-direction: column; cursor: pointer; overflow: hidden; }
+    .ic-pic { position: relative; width: 100%; overflow: hidden; }
+    .ic-pic img { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+    .ic-noimg { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
+    .ic-rank { position: absolute; left: 8px; top: 8px; border-radius: 999px; padding: 2px 9px; font-weight: bold; }
+    .ic-body { display: flex; flex-direction: column; gap: 2px; }
+    .ic-name { font-weight: bold; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .ic-sub { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .ic-row { display: flex; align-items: baseline; justify-content: space-between; gap: 6px; }
+    .ic-val { font-weight: bold; white-space: nowrap; }
+    .ic-v2 { white-space: nowrap; }
+    .ic-bar { height: 4px; border-radius: 2px; overflow: hidden; }
+    .ic-bar i { display: block; height: 100%; border-radius: 2px; }
+}
+.hint {
+    display: none;
+    padding: 12px;
+    font-family: "Segoe UI", "Microsoft YaHei", sans-serif;
+    font-size: 13px;
+    color: #605E5C;
+    white-space: pre-line;
+}

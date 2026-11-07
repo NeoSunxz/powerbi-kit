@@ -2,7 +2,7 @@
 
 [English](README.md) | [中文](README.zh-CN.md)
 
-A personal toolkit for letting AI work directly in Power BI: MCP setup notes, a report-building skill, color themes, a custom visual, and sample data.
+A personal toolkit for letting AI work directly in Power BI: MCP setup notes, a report-building skill, color themes, custom visuals, and sample data.
 
 > Personal project. It contains only sample data and public information — no work files.
 
@@ -12,10 +12,10 @@ A personal toolkit for letting AI work directly in Power BI: MCP setup notes, a 
 powerbi-kit/
 ├─ docs/setup.md            Set up the Power BI MCP on Windows (Claude Code / WorkBuddy / DeepSeek harness)
 ├─ skills/neo-powerbi/      Ground rules for building reports: read first, back up before edits, naming, verify numbers, report back
-├─ themes/                  3 Power BI themes: oat-latte / forest-gold / mist-blue
-├─ visuals/                 Custom visual source: calendarHeatmap
-├─ downloads/               Packaged visuals, ready to import
-└─ sample-data/             A fictional coffee-shop sales dataset (2024–2025), for demos only
+├─ themes/                  4 Power BI themes: oat-latte / forest-gold / mist-blue / navy-blue
+├─ visuals/                 Custom visual source: calendar heatmap, bullet chart, image cards, Pareto chart, bump chart
+├─ downloads/               5 packaged visuals, ready to import
+└─ sample-data/             A fictional coffee-shop sales dataset (2024–2025) plus store targets and product images, for demos only
 ```
 
 Most docs and the sample data are in Chinese.
@@ -26,16 +26,26 @@ Most docs and the sample data are in Chinese.
 2. Copy `skills/neo-powerbi` into your AI tool's skills folder (Claude Code: `%USERPROFILE%\.claude\skills\`).
 3. Build a demo file from the 3 tables in `sample-data` and run the test in step 4 of setup.md.
 
-## Importing the calendar heatmap visual
+## Importing a visual
 
-Download [downloads/calendar-heatmap.pbiviz](downloads/calendar-heatmap.pbiviz), then in Power BI Desktop: Visualizations pane → `…` → Import a visual from a file. Usage notes: [downloads/README.md](downloads/README.md).
+Download a `.pbiviz` from [downloads/](downloads/), then in Power BI Desktop: Visualizations pane → `…` → Import a visual from a file.
 
-The visual draws one row per year and one cell per day; darker means a higher value. It supports native tooltips and cross-filtering, makes no network calls, and collects no data. It is not certified by Microsoft, so some organizations may block it.
+| File | Visual |
+|---|---|
+| [calendar-heatmap.pbiviz](downloads/calendar-heatmap.pbiviz) | Calendar heatmap: one row per year, one cell per day, darker means higher |
+| [bullet-chart.pbiviz](downloads/bullet-chart.pbiviz) | Bullet chart: actual vs target |
+| [pareto-chart.pbiviz](downloads/pareto-chart.pbiviz) | Pareto chart: bars from high to low plus a cumulative-share line |
+| [bump-chart.pbiviz](downloads/bump-chart.pbiviz) | Bump chart: how rankings change over time |
+| [image-cards.pbiviz](downloads/image-cards.pbiviz) | Image cards: a ranked card wall with a picture per item |
+
+Which fields go where, with the sample data: [downloads/README.md](downloads/README.md) (in Chinese).
+
+The visuals follow the report theme's colors, support native tooltips and cross-filtering, make no network calls, and collect no data. They are not certified by Microsoft, so some organizations may block them.
 
 ## Importing a theme
 
 Power BI Desktop → Design → Import theme, and pick a `.json` from `themes/` (older versions: View → Themes → Browse for themes).
-Each theme also sets the canvas background, the wallpaper and the visual background (oat-latte `#EFEBE5`, forest-gold `#0E1916`, mist-blue `#EAEEF3`). A page or visual whose background was already set by hand keeps that setting; select it and use Reset to default to pick up the theme.
+Each theme also sets the canvas background, the wallpaper and the visual background (oat-latte `#EFEBE5`, forest-gold `#0E1916`, mist-blue `#EAEEF3`, navy-blue `#0E1626`). A page or visual whose background was already set by hand keeps that setting; select it and use Reset to default to pick up the theme.
 
 ## Updating
 

@@ -1,0 +1,26 @@
+{
+  "visual": {
+    "name": "imageCards",
+    "displayName": "图片卡片墙 · NeoSun",
+    "guid": "imageCardsE638D425AFF44F59AD31ACEFE82FE819",
+    "visualClassName": "Visual",
+    "version": "1.0.0.0",
+    "description": "每个类别一张卡片：上面是图片，下面是名称和数值，按数值排名。图片用 base64（data:image/...）存在表里，不联网。支持点选交叉筛选和 Power BI 原生提示框。",
+    "supportUrl": "https://github.com/NeoSunxz/powerbi-kit",
+    "gitHubUrl": "https://github.com/NeoSunxz/powerbi-kit"
+  },
+  "apiVersion": "5.11.1",
+  "author": {
+    "name": "NeoSun",
+    "email": "44791984+NeoSunxz@users.noreply.github.com"
+  },
+  "assets": {
+    "icon": "assets/icon.png"
+  },
+  "externalJS": null,
+  "style": "style/visual.less",
+  "capabilities": "capabilities.json",
+  "dependencies": null,
+  "stringResources": [],
+  "version": "1.0.0.0"
+}

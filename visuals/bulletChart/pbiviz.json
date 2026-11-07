@@ -1,0 +1,26 @@
+{
+  "visual": {
+    "name": "bulletChart",
+    "displayName": "子弹图 · NeoSun",
+    "guid": "bulletChartC2F42D2940444270A9C92188FCA9099A",
+    "visualClassName": "Visual",
+    "version": "1.0.0.0",
+    "description": "每个类别一行：实际值是一根细条，目标是一道竖线，背后的色带是差 / 中 / 好的区间，完成率一眼看清。支持点选交叉筛选和 Power BI 原生提示框。不联网、不收集数据。",
+    "supportUrl": "https://github.com/NeoSunxz/powerbi-kit",
+    "gitHubUrl": "https://github.com/NeoSunxz/powerbi-kit"
+  },
+  "apiVersion": "5.11.1",
+  "author": {
+    "name": "NeoSun",
+    "email": "44791984+NeoSunxz@users.noreply.github.com"
+  },
+  "assets": {
+    "icon": "assets/icon.png"
+  },
+  "externalJS": null,
+  "style": "style/visual.less",
+  "capabilities": "capabilities.json",
+  "dependencies": null,
+  "stringResources": [],
+  "version": "1.0.0.0"
+}

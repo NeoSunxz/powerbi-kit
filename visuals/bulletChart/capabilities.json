@@ -1,0 +1,250 @@
+{
+    "dataRoles": [
+        {
+            "displayName": "类别",
+            "name": "category",
+            "kind": "Grouping"
+        },
+        {
+            "displayName": "实际",
+            "name": "actual",
+            "kind": "Measure"
+        },
+        {
+            "displayName": "目标",
+            "name": "target",
+            "kind": "Measure"
+        }
+    ],
+    "dataViewMappings": [
+        {
+            "conditions": [
+                {
+                    "category": {
+                        "max": 1
+                    },
+                    "actual": {
+                        "max": 1
+                    },
+                    "target": {
+                        "max": 1
+                    }
+                }
+            ],
+            "categorical": {
+                "categories": {
+                    "for": {
+                        "in": "category"
+                    },
+                    "dataReductionAlgorithm": {
+                        "top": {
+                            "count": 1000
+                        }
+                    }
+                },
+                "values": {
+                    "select": [
+                        {
+                            "bind": {
+                                "to": "actual"
+                            }
+                        },
+                        {
+                            "bind": {
+                                "to": "target"
+                            }
+                        }
+                    ]
+                }
+            }
+        }
+    ],
+    "objects": {
+        "colors": {
+            "properties": {
+                "useTheme": {
+                    "type": {
+                        "bool": true
+                    }
+                },
+                "barColor": {
+                    "type": {
+                        "fill": {
+                            "solid": {
+                                "color": true
+                            }
+                        }
+                    }
+                },
+                "missColor": {
+                    "type": {
+                        "fill": {
+                            "solid": {
+                                "color": true
+                            }
+                        }
+                    }
+                },
+                "targetColor": {
+                    "type": {
+                        "fill": {
+                            "solid": {
+                                "color": true
+                            }
+                        }
+                    }
+                },
+                "bandColor": {
+                    "type": {
+                        "fill": {
+                            "solid": {
+                                "color": true
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "bands": {
+            "properties": {
+                "poor": {
+                    "type": {
+                        "numeric": true
+                    }
+                },
+                "good": {
+                    "type": {
+                        "numeric": true
+                    }
+                },
+                "max": {
+                    "type": {
+                        "numeric": true
+                    }
+                }
+            }
+        },
+        "layout": {
+            "properties": {
+                "scale": {
+                    "type": {
+                        "enumeration": [
+                            {
+                                "value": "rate",
+                                "displayName": "按完成率（目标对齐）"
+                            },
+                            {
+                                "value": "value",
+                                "displayName": "按数值（统一刻度）"
+                            }
+                        ]
+                    }
+                },
+                "sort": {
+                    "type": {
+                        "enumeration": [
+                            {
+                                "value": "rate",
+                                "displayName": "按完成率，从高到低"
+                            },
+                            {
+                                "value": "none",
+                                "displayName": "按字段原顺序"
+                            }
+                        ]
+                    }
+                },
+                "barHeight": {
+                    "type": {
+                        "numeric": true
+                    }
+                },
+                "missHighlight": {
+                    "type": {
+                        "bool": true
+                    }
+                }
+            }
+        },
+        "labels": {
+            "properties": {
+                "showValue": {
+                    "type": {
+                        "bool": true
+                    }
+                },
+                "showRate": {
+                    "type": {
+                        "bool": true
+                    }
+                },
+                "unit": {
+                    "type": {
+                        "enumeration": [
+                            {
+                                "value": "auto",
+                                "displayName": "自动（满 1 万显示「万」）"
+                            },
+                            {
+                                "value": "none",
+                                "displayName": "原值"
+                            }
+                        ]
+                    }
+                },
+                "showLegend": {
+                    "type": {
+                        "bool": true
+                    }
+                }
+            }
+        },
+        "text": {
+            "properties": {
+                "useTheme": {
+                    "type": {
+                        "bool": true
+                    }
+                },
+                "fontFamily": {
+                    "type": {
+                        "formatting": {
+                            "fontFamily": true
+                        }
+                    }
+                },
+                "fontSize": {
+                    "type": {
+                        "formatting": {
+                            "fontSize": true
+                        }
+                    }
+                },
+                "bold": {
+                    "type": {
+                        "bool": true
+                    }
+                },
+                "color": {
+                    "type": {
+                        "fill": {
+                            "solid": {
+                                "color": true
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "supportsHighlight": false,
+    "supportsMultiVisualSelection": true,
+    "supportsLandingPage": true,
+    "tooltips": {
+        "supportedTypes": {
+            "default": true,
+            "canvas": true
+        }
+    },
+    "privileges": []
+}
