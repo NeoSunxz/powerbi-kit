@@ -1,0 +1,26 @@
+{
+  "visual": {
+    "name": "waffle",
+    "displayName": "华夫饼图 · NeoSun",
+    "guid": "waffle3D20353E30ED406A8815A4901699B767",
+    "visualClassName": "Visual",
+    "version": "1.0.0.0",
+    "description": "10×10 共 100 格，每格 1%，各类别按占比填格子。支持点选交叉筛选和 Power BI 原生提示框。不联网、不收集数据。",
+    "supportUrl": "https://github.com/NeoSunxz/powerbi-kit",
+    "gitHubUrl": "https://github.com/NeoSunxz/powerbi-kit"
+  },
+  "apiVersion": "5.11.1",
+  "author": {
+    "name": "NeoSun",
+    "email": "44791984+NeoSunxz@users.noreply.github.com"
+  },
+  "assets": {
+    "icon": "assets/icon.png"
+  },
+  "externalJS": null,
+  "style": "style/visual.less",
+  "capabilities": "capabilities.json",
+  "dependencies": null,
+  "stringResources": [],
+  "version": "1.0.0.0"
+}

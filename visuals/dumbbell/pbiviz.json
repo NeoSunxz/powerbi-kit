@@ -1,0 +1,26 @@
+{
+  "visual": {
+    "name": "dumbbell",
+    "displayName": "哑铃图 · NeoSun",
+    "guid": "dumbbellAF5BF8303B264491A5F51F24C19E093F",
+    "visualClassName": "Visual",
+    "version": "1.0.0.0",
+    "description": "每个类别一行，两个点连一条线：起点（如去年）和终点（如今年），涨了多少、跌了多少一眼看清。支持点选交叉筛选和 Power BI 原生提示框。不联网、不收集数据。",
+    "supportUrl": "https://github.com/NeoSunxz/powerbi-kit",
+    "gitHubUrl": "https://github.com/NeoSunxz/powerbi-kit"
+  },
+  "apiVersion": "5.11.1",
+  "author": {
+    "name": "NeoSun",
+    "email": "44791984+NeoSunxz@users.noreply.github.com"
+  },
+  "assets": {
+    "icon": "assets/icon.png"
+  },
+  "externalJS": null,
+  "style": "style/visual.less",
+  "capabilities": "capabilities.json",
+  "dependencies": null,
+  "stringResources": [],
+  "version": "1.0.0.0"
+}

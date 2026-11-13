@@ -1,0 +1,217 @@
+{
+    "dataRoles": [
+        {
+            "displayName": "类别",
+            "name": "category",
+            "kind": "Grouping"
+        },
+        {
+            "displayName": "起点",
+            "name": "start",
+            "kind": "Measure"
+        },
+        {
+            "displayName": "终点",
+            "name": "end",
+            "kind": "Measure"
+        }
+    ],
+    "dataViewMappings": [
+        {
+            "conditions": [
+                {
+                    "category": {
+                        "max": 1
+                    },
+                    "start": {
+                        "max": 1
+                    },
+                    "end": {
+                        "max": 1
+                    }
+                }
+            ],
+            "categorical": {
+                "categories": {
+                    "for": {
+                        "in": "category"
+                    },
+                    "dataReductionAlgorithm": {
+                        "top": {
+                            "count": 1000
+                        }
+                    }
+                },
+                "values": {
+                    "select": [
+                        {
+                            "bind": {
+                                "to": "start"
+                            }
+                        },
+                        {
+                            "bind": {
+                                "to": "end"
+                            }
+                        }
+                    ]
+                }
+            }
+        }
+    ],
+    "objects": {
+        "colors": {
+            "properties": {
+                "useTheme": {
+                    "type": {
+                        "bool": true
+                    }
+                },
+                "startColor": {
+                    "type": {
+                        "fill": {
+                            "solid": {
+                                "color": true
+                            }
+                        }
+                    }
+                },
+                "upColor": {
+                    "type": {
+                        "fill": {
+                            "solid": {
+                                "color": true
+                            }
+                        }
+                    }
+                },
+                "downColor": {
+                    "type": {
+                        "fill": {
+                            "solid": {
+                                "color": true
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "layout": {
+            "properties": {
+                "sort": {
+                    "type": {
+                        "enumeration": [
+                            {
+                                "value": "end",
+                                "displayName": "按终点值，从大到小"
+                            },
+                            {
+                                "value": "change",
+                                "displayName": "按变化幅度，从大到小"
+                            },
+                            {
+                                "value": "none",
+                                "displayName": "按字段原顺序"
+                            }
+                        ]
+                    }
+                },
+                "zeroBased": {
+                    "type": {
+                        "bool": true
+                    }
+                },
+                "dotSize": {
+                    "type": {
+                        "numeric": true
+                    }
+                },
+                "lineWidth": {
+                    "type": {
+                        "numeric": true
+                    }
+                }
+            }
+        },
+        "labels": {
+            "properties": {
+                "showValues": {
+                    "type": {
+                        "bool": true
+                    }
+                },
+                "showChange": {
+                    "type": {
+                        "bool": true
+                    }
+                },
+                "unit": {
+                    "type": {
+                        "enumeration": [
+                            {
+                                "value": "auto",
+                                "displayName": "自动（满 1 万显示「万」）"
+                            },
+                            {
+                                "value": "none",
+                                "displayName": "原值"
+                            }
+                        ]
+                    }
+                },
+                "showLegend": {
+                    "type": {
+                        "bool": true
+                    }
+                }
+            }
+        },
+        "text": {
+            "properties": {
+                "useTheme": {
+                    "type": {
+                        "bool": true
+                    }
+                },
+                "fontFamily": {
+                    "type": {
+                        "formatting": {
+                            "fontFamily": true
+                        }
+                    }
+                },
+                "fontSize": {
+                    "type": {
+                        "formatting": {
+                            "fontSize": true
+                        }
+                    }
+                },
+                "bold": {
+                    "type": {
+                        "bool": true
+                    }
+                },
+                "color": {
+                    "type": {
+                        "fill": {
+                            "solid": {
+                                "color": true
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "supportsHighlight": false,
+    "supportsMultiVisualSelection": true,
+    "supportsLandingPage": true,
+    "tooltips": {
+        "supportedTypes": {
+            "default": true,
+            "canvas": true
+        }
+    },
+    "privileges": []
+}

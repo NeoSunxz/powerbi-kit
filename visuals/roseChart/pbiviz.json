@@ -1,0 +1,26 @@
+{
+  "visual": {
+    "name": "roseChart",
+    "displayName": "南丁格尔玫瑰图 · NeoSun",
+    "guid": "roseChart833DB30541EF40F79CBF67A4B4B52E02",
+    "visualClassName": "Visual",
+    "version": "1.0.0.0",
+    "description": "每个类别一片花瓣，角度相同，半径表示数值大小。支持点选交叉筛选和 Power BI 原生提示框。不联网、不收集数据。",
+    "supportUrl": "https://github.com/NeoSunxz/powerbi-kit",
+    "gitHubUrl": "https://github.com/NeoSunxz/powerbi-kit"
+  },
+  "apiVersion": "5.11.1",
+  "author": {
+    "name": "NeoSun",
+    "email": "44791984+NeoSunxz@users.noreply.github.com"
+  },
+  "assets": {
+    "icon": "assets/icon.png"
+  },
+  "externalJS": null,
+  "style": "style/visual.less",
+  "capabilities": "capabilities.json",
+  "dependencies": null,
+  "stringResources": [],
+  "version": "1.0.0.0"
+}

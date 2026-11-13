@@ -3,6 +3,9 @@
 | 文件 | 是什么 |
 |---|---|
 | `calendar-heatmap.pbiviz` | 日历热力图组件（1.1.4，Power BI 里显示为「日历热力图 · NeoSun」），源码在 [visuals/calendarHeatmap](../visuals/calendarHeatmap) |
+| `dumbbell.pbiviz` | 哑铃图（1.0）：两个时间点的对比，源码在 [visuals/dumbbell](../visuals/dumbbell) |
+| `waffle.pbiviz` | 华夫饼图（1.0）：10×10 格看占比，源码在 [visuals/waffle](../visuals/waffle) |
+| `rose-chart.pbiviz` | 南丁格尔玫瑰图（1.0）：一个类别一片花瓣，半径表示数值，源码在 [visuals/roseChart](../visuals/roseChart) |
 | `bullet-chart.pbiviz` | 子弹图（1.0）：实际 vs 目标的完成率，源码在 [visuals/bulletChart](../visuals/bulletChart) |
 | `pareto-chart.pbiviz` | 帕累托图（1.0）：从高到低的柱子加累计占比折线，看哪几个撑起八成，源码在 [visuals/paretoChart](../visuals/paretoChart) |
 | `bump-chart.pbiviz` | 排名变化图（1.0）：凹凸图，每个时间点的名次连成线，源码在 [visuals/bumpChart](../visuals/bumpChart) |
@@ -32,7 +35,7 @@
 - 只在你的 Power BI 里画图，不联网，不收集、不上传任何数据。
 - 没有经过微软认证。公司电脑如果禁止未认证的视觉对象，会导入不了或显示不出来，先问问 IT。
 
-## 子弹图、帕累托图、排名变化图、图片卡片墙怎么用
+## 哑铃图、华夫饼图、南丁格尔玫瑰图、子弹图、帕累托图、排名变化图、图片卡片墙怎么用
 
 先导入 sample-data 的 3 张表，子弹图再加「目标」（目标[门店ID] → 门店[门店ID]），图片卡片墙再加「产品图片」（产品图片[产品ID] → 产品[产品ID]，一对一）。建度量值：
 
@@ -48,6 +51,9 @@
 
 | 组件 | 类别 | 数值 |
 |---|---|---|
+| 哑铃图 | 门店[门店] | 起点 = 2024 销售额，终点 = 2025 销售额 |
+| 华夫饼图 | 产品[品类] | 数值 = 销售额 |
+| 南丁格尔玫瑰图 | 门店[门店] | 数值 = 2025 销售额 |
 | 子弹图 | 门店[门店] | 实际 = 2025 销售额，目标 = 目标销售额 |
 | 帕累托图 | 产品[产品] | 数值 = 2025 销售额 |
 | 排名变化图 | 类别 = 产品[产品]，时间 = 销售明细[月份] | 数值 = 2025 销售额 |

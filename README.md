@@ -13,8 +13,8 @@ powerbi-kit/
 ├─ docs/setup.md            Set up the Power BI MCP on Windows (Claude Code / WorkBuddy / DeepSeek harness)
 ├─ skills/neo-powerbi/      Ground rules for building reports: read first, back up before edits, naming, verify numbers, report back
 ├─ themes/                  4 Power BI themes: oat-latte / forest-gold / mist-blue / navy-blue
-├─ visuals/                 Custom visual source: calendar heatmap, bullet chart, image cards, Pareto chart, bump chart
-├─ downloads/               5 packaged visuals, ready to import
+├─ visuals/                 Custom visual source: calendar heatmap, dumbbell, waffle, rose chart, bullet chart, image cards, Pareto chart, bump chart
+├─ downloads/               8 packaged visuals, ready to import
 └─ sample-data/             A fictional coffee-shop sales dataset (2024–2025) plus store targets and product images, for demos only
 ```
 
@@ -33,6 +33,9 @@ Download a `.pbiviz` from [downloads/](downloads/), then in Power BI Desktop: Vi
 | File | Visual |
 |---|---|
 | [calendar-heatmap.pbiviz](downloads/calendar-heatmap.pbiviz) | Calendar heatmap: one row per year, one cell per day, darker means higher |
+| [dumbbell.pbiviz](downloads/dumbbell.pbiviz) | Dumbbell: compare two points in time |
+| [waffle.pbiviz](downloads/waffle.pbiviz) | Waffle: share of total on a 10×10 grid |
+| [rose-chart.pbiviz](downloads/rose-chart.pbiviz) | Rose chart: one petal per category, radius shows the value |
 | [bullet-chart.pbiviz](downloads/bullet-chart.pbiviz) | Bullet chart: actual vs target |
 | [pareto-chart.pbiviz](downloads/pareto-chart.pbiviz) | Pareto chart: bars from high to low plus a cumulative-share line |
 | [bump-chart.pbiviz](downloads/bump-chart.pbiviz) | Bump chart: how rankings change over time |

@@ -13,8 +13,8 @@ powerbi-kit/
 ├─ docs/setup.md            在 Windows 上配好 Power BI MCP（Claude Code / WorkBuddy / DeepSeek harness）
 ├─ skills/neo-powerbi/      做报表的规矩：先只读、改前备份、命名格式、改完核数、汇报格式
 ├─ themes/                  4 套 Power BI 主题：oat-latte 燕麦拿铁 / forest-gold 墨绿鎏金 / mist-blue 雾霾蓝 / navy-blue 深夜蓝
-├─ visuals/                 自定义组件源码：日历热力图、子弹图、图片卡片墙、帕累托图、排名变化图
-├─ downloads/               5 个打包好的组件，下载就能导入
+├─ visuals/                 自定义组件源码：日历热力图、哑铃图、华夫饼图、南丁格尔玫瑰图、子弹图、图片卡片墙、帕累托图、排名变化图
+├─ downloads/               8 个打包好的组件，下载就能导入
 └─ sample-data/             虚构的咖啡店销售数据（2024–2025）、门店目标和产品图片，演示专用
 ```
 
@@ -31,6 +31,9 @@ powerbi-kit/
 | 文件 | 组件 |
 |---|---|
 | [calendar-heatmap.pbiviz](downloads/calendar-heatmap.pbiviz) | 日历热力图：一年一行、一天一格，越深数越大 |
+| [dumbbell.pbiviz](downloads/dumbbell.pbiviz) | 哑铃图：两个时间点的对比 |
+| [waffle.pbiviz](downloads/waffle.pbiviz) | 华夫饼图：10×10 格看占比 |
+| [rose-chart.pbiviz](downloads/rose-chart.pbiviz) | 南丁格尔玫瑰图：一个类别一片花瓣，半径表示数值 |
 | [bullet-chart.pbiviz](downloads/bullet-chart.pbiviz) | 子弹图：实际 vs 目标 |
 | [pareto-chart.pbiviz](downloads/pareto-chart.pbiviz) | 帕累托图：从高到低的柱子加累计占比折线 |
 | [bump-chart.pbiviz](downloads/bump-chart.pbiviz) | 排名变化图：每个时间点的名次连成线 |

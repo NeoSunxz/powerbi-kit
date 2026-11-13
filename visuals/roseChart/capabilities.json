@@ -1,0 +1,226 @@
+{
+    "dataRoles": [
+        {
+            "displayName": "类别",
+            "name": "category",
+            "kind": "Grouping"
+        },
+        {
+            "displayName": "数值",
+            "name": "value",
+            "kind": "Measure"
+        }
+    ],
+    "dataViewMappings": [
+        {
+            "conditions": [
+                {
+                    "category": {
+                        "max": 1
+                    },
+                    "value": {
+                        "max": 1
+                    }
+                }
+            ],
+            "categorical": {
+                "categories": {
+                    "for": {
+                        "in": "category"
+                    },
+                    "dataReductionAlgorithm": {
+                        "top": {
+                            "count": 1000
+                        }
+                    }
+                },
+                "values": {
+                    "select": [
+                        {
+                            "bind": {
+                                "to": "value"
+                            }
+                        }
+                    ]
+                }
+            }
+        }
+    ],
+    "objects": {
+        "dataPoint": {
+            "properties": {
+                "fill": {
+                    "type": {
+                        "fill": {
+                            "solid": {
+                                "color": true
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "colors": {
+            "properties": {
+                "mode": {
+                    "type": {
+                        "enumeration": [
+                            {
+                                "value": "gradient",
+                                "displayName": "渐变（主题第一个颜色，从深到浅）"
+                            },
+                            {
+                                "value": "theme",
+                                "displayName": "按类别（主题颜色轮换）"
+                            },
+                            {
+                                "value": "custom",
+                                "displayName": "自己选每个类别"
+                            }
+                        ]
+                    }
+                }
+            }
+        },
+        "layout": {
+            "properties": {
+                "sort": {
+                    "type": {
+                        "enumeration": [
+                            {
+                                "value": "desc",
+                                "displayName": "按数值，从大到小"
+                            },
+                            {
+                                "value": "none",
+                                "displayName": "按字段原顺序"
+                            }
+                        ]
+                    }
+                },
+                "radiusMode": {
+                    "type": {
+                        "enumeration": [
+                            {
+                                "value": "value",
+                                "displayName": "半径按数值（从 0 开始）"
+                            },
+                            {
+                                "value": "area",
+                                "displayName": "面积按数值"
+                            },
+                            {
+                                "value": "range",
+                                "displayName": "突出差异（最小值到最大值）"
+                            }
+                        ]
+                    }
+                },
+                "innerRadius": {
+                    "type": {
+                        "numeric": true
+                    }
+                },
+                "padAngle": {
+                    "type": {
+                        "numeric": true
+                    }
+                },
+                "cornerRadius": {
+                    "type": {
+                        "numeric": true
+                    }
+                }
+            }
+        },
+        "labels": {
+            "properties": {
+                "show": {
+                    "type": {
+                        "bool": true
+                    }
+                },
+                "showValue": {
+                    "type": {
+                        "bool": true
+                    }
+                },
+                "unit": {
+                    "type": {
+                        "enumeration": [
+                            {
+                                "value": "auto",
+                                "displayName": "自动（满 1 万显示「万」）"
+                            },
+                            {
+                                "value": "none",
+                                "displayName": "原值"
+                            }
+                        ]
+                    }
+                }
+            }
+        },
+        "center": {
+            "properties": {
+                "show": {
+                    "type": {
+                        "bool": true
+                    }
+                },
+                "title": {
+                    "type": {
+                        "text": true
+                    }
+                }
+            }
+        },
+        "text": {
+            "properties": {
+                "useTheme": {
+                    "type": {
+                        "bool": true
+                    }
+                },
+                "fontFamily": {
+                    "type": {
+                        "formatting": {
+                            "fontFamily": true
+                        }
+                    }
+                },
+                "fontSize": {
+                    "type": {
+                        "formatting": {
+                            "fontSize": true
+                        }
+                    }
+                },
+                "bold": {
+                    "type": {
+                        "bool": true
+                    }
+                },
+                "color": {
+                    "type": {
+                        "fill": {
+                            "solid": {
+                                "color": true
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "supportsHighlight": false,
+    "supportsMultiVisualSelection": true,
+    "supportsLandingPage": true,
+    "tooltips": {
+        "supportedTypes": {
+            "default": true,
+            "canvas": true
+        }
+    },
+    "privileges": []
+}
