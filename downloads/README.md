@@ -7,7 +7,7 @@
 | `waffle.pbiviz` | 华夫饼图（1.0）：10×10 格看占比，源码在 [visuals/waffle](../visuals/waffle) |
 | `rose-chart.pbiviz` | 南丁格尔玫瑰图（1.0）：一个类别一片花瓣，半径表示数值，源码在 [visuals/roseChart](../visuals/roseChart) |
 | `bullet-chart.pbiviz` | 子弹图（1.0）：实际 vs 目标的完成率，源码在 [visuals/bulletChart](../visuals/bulletChart) |
-| `pareto-chart.pbiviz` | 帕累托图（1.0）：从高到低的柱子加累计占比折线，看哪几个撑起八成，源码在 [visuals/paretoChart](../visuals/paretoChart) |
+| `pareto-chart.pbiviz` | 帕累托图（1.1）：从高到低的柱子加累计占比折线，看哪几个撑起八成；纵轴默认两把尺（左边数值、右边百分比），也可以换成一把百分比尺，源码在 [visuals/paretoChart](../visuals/paretoChart) |
 | `bump-chart.pbiviz` | 排名变化图（1.0）：凹凸图，每个时间点的名次连成线，源码在 [visuals/bumpChart](../visuals/bumpChart) |
 | `image-cards.pbiviz` | 图片卡片墙（1.0）：一个产品一张带图片的卡片，按数值排名，源码在 [visuals/imageCards](../visuals/imageCards) |
 

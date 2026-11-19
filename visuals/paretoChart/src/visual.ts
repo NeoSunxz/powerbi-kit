@@ -171,6 +171,7 @@ export class Visual implements IVisual {
         const showThr = s.thresholdCard.show.value;
         const dim = s.layoutCard.dimRest.value;
         const maxV = d3.max(items, d => d.value);
+        const dual = s.axisCard.mode.value.value === "dual";
         const cross = items.filter(d => d.inside).pop();
 
         this.svg.attr("width", width).attr("height", height)
@@ -180,28 +181,50 @@ export class Visual implements IVisual {
 
         const probe = this.svg.append("text").attr("font-size", font * 0.9);
         const measure = (t: string) => { probe.text(t); return probe.node().getComputedTextLength(); };
-        const axisW = measure("100%");
+        const pctW = measure("100%");
+        // 两把尺：左边是数值刻度，按最高的柱子取整，柱子画得高；右边是百分比，管折线和分界线
+        const valMax = dual ? d3.nice(0, maxV, 5)[1] : 0;
+        const valTicks = dual ? d3.ticks(0, valMax, 5) : [];
+        const axisW = dual ? d3.max(valTicks, v => measure(v === 0 ? "0" : this.fmt(v, valMax))) : pctW;
         const nameW = d3.max(items, d => measure(d.name));
         const thrW = measure(pct(thr));
         probe.remove();
 
         const headH = font * 2.4;
-        const left = axisW + font * 0.8, right = showThr ? thrW + font * 1.2 : font;
+        const left = axisW + font * 0.8;
+        const right = dual ? Math.max(pctW, showThr ? thrW : 0) + font * 0.9 : showThr ? thrW + font * 1.2 : font;
         const plotW = Math.max(20, width - left - right);
         const x = d3.scaleBand<number>().domain(items.map((_, i) => i)).range([left, left + plotW]).paddingInner(0.28).paddingOuter(0.14);
         const rotate = nameW > x.step() * 0.95;
         const bottom = rotate ? Math.min(height * 0.4, nameW * 0.72 + font) : font * 2;
         const top = headH + font * 0.6;
         const y = d3.scaleLinear().domain([0, 1]).range([height - bottom, top]);
+        // 柱顶的位置：一把尺时按占比，两把尺时按左边的数值刻度
+        const barTop = (d: Item) => dual ? y(valMax > 0 ? d.value / valMax : 0) : y(d.share);
 
-        // 纵轴：一把 0–100% 的尺，柱子和折线共用
+        // 纵轴：默认一把 0–100% 的尺，柱子和折线共用；两把尺时左边按数值、右边按百分比，同一个比例换算
         const axis = this.svg.append("g").classed("axis", true).attr("font-size", font * 0.9);
-        [0, 0.2, 0.4, 0.6, 0.8, 1].forEach(t => {
-            axis.append("line").attr("x1", left).attr("x2", left + plotW).attr("y1", y(t)).attr("y2", y(t))
-                .attr("stroke", colors.grid).attr("stroke-width", 1);
-            axis.append("text").attr("x", left - font * 0.5).attr("y", y(t)).attr("text-anchor", "end")
-                .attr("dominant-baseline", "middle").text(pct(t));
-        });
+        const pctTicks = [0, 0.2, 0.4, 0.6, 0.8, 1];
+        if (!dual) {
+            pctTicks.forEach(t => {
+                axis.append("line").attr("x1", left).attr("x2", left + plotW).attr("y1", y(t)).attr("y2", y(t))
+                    .attr("stroke", colors.grid).attr("stroke-width", 1);
+                axis.append("text").attr("x", left - font * 0.5).attr("y", y(t)).attr("text-anchor", "end")
+                    .attr("dominant-baseline", "middle").text(pct(t));
+            });
+        } else {
+            valTicks.forEach(v => {
+                const ty = y(valMax > 0 ? v / valMax : 0);
+                axis.append("line").attr("x1", left).attr("x2", left + plotW).attr("y1", ty).attr("y2", ty)
+                    .attr("stroke", colors.grid).attr("stroke-width", 1);
+                axis.append("text").attr("x", left - font * 0.5).attr("y", ty).attr("text-anchor", "end")
+                    .attr("dominant-baseline", "middle").text(v === 0 ? "0" : this.fmt(v, valMax));
+            });
+            // 右边的百分比：离分界线太近的刻度不写，免得两个数叠在一起
+            pctTicks.filter(t => !showThr || Math.abs(y(t) - y(thr)) > font * 1.1).forEach(t => {
+                axis.append("text").attr("x", left + plotW + font * 0.5).attr("y", y(t)).attr("dominant-baseline", "middle").text(pct(t));
+            });
+        }
 
         // 横轴文字
         const names = this.svg.append("g").attr("font-size", font * 0.9);
@@ -217,7 +240,7 @@ export class Visual implements IVisual {
             this.svg.append("line").attr("x1", left).attr("x2", left + plotW).attr("y1", y(thr)).attr("y2", y(thr))
                 .attr("stroke", colors.line).attr("stroke-width", 1.2).attr("stroke-dasharray", "5,4").attr("opacity", 0.7);
             this.svg.append("text").attr("x", left + plotW + font * 0.5).attr("y", y(thr)).attr("dominant-baseline", "middle")
-                .attr("font-size", font * 0.9).text(pct(thr));
+                .attr("font-size", font * 0.9).style("font-weight", dual ? "bold" : null).text(pct(thr));
         }
 
         // 柱子
@@ -226,19 +249,19 @@ export class Visual implements IVisual {
             .attr("width", x.step()).attr("height", height - bottom - top).attr("fill", "transparent");
         const barColor = (d: Item) => !dim || (d.inside && d.selectionId) ? colors.bar : colors.rest;
         g.append("path").classed("bar", true)
-            .attr("d", (d, i) => roundTop(x(i), y(d.share), x.bandwidth(), y(0) - y(d.share), Math.min(4, x.bandwidth() / 4)))
+            .attr("d", (d, i) => roundTop(x(i), barTop(d), x.bandwidth(), y(0) - barTop(d), Math.min(4, x.bandwidth() / 4)))
             .attr("fill", barColor);
         if (lb.showValue.value) {
             g.append("text").attr("font-size", font * 0.85).attr("text-anchor", "middle")
                 .attr("x", (_, i) => x(i) + x.bandwidth() / 2)
                 .each((d, i, nodes) => {
-                    const h = y(0) - y(d.share), t = d3.select(nodes[i]).text(this.fmt(d.value, maxV));
+                    const h = y(0) - barTop(d), t = d3.select(nodes[i]).text(this.fmt(d.value, maxV));
                     const w = t.node().getComputedTextLength();
                     // 柱子够高够宽就把数写在柱子里，免得和折线的点挤在一起
                     if (h > font * 2.2 && w < x.bandwidth() - 4) {
-                        t.attr("y", y(d.share) + font * 1.25).style("fill", barColor(d) === colors.bar ? colors.surface : colors.text);
+                        t.attr("y", barTop(d) + font * 1.25).style("fill", barColor(d) === colors.bar ? colors.surface : colors.text);
                     } else {
-                        t.attr("y", y(d.share) - font * 0.45);
+                        t.attr("y", barTop(d) - font * 0.45);
                     }
                 });
         }
@@ -270,14 +293,14 @@ export class Visual implements IVisual {
             head.append("text").attr("font-size", font * 1.2).style("font-weight", "bold").style("fill", colors.line)
                 .text(`前 ${said.rank} 个占 ${pct(said.cum)}`);
         }
-        this.drawLegend(colors, font, left + plotW);
+        this.drawLegend(colors, font, left + plotW, dual);
         this.bindInteractions(maxV);
         this.applySelection();
     }
 
-    private drawLegend(colors: Colors, font: number, rightEdge: number) {
+    private drawLegend(colors: Colors, font: number, rightEdge: number, dual: boolean) {
         const g = this.svg.append("g").classed("legend", true).attr("font-size", font * 0.9);
-        const items: Array<[string, string]> = [["bar", `${this.names.value}占比`], ["line", "累计占比"]];
+        const items: Array<[string, string]> = [["bar", dual ? this.names.value : `${this.names.value}占比`], ["line", "累计占比"]];
         let x = 0;
         const parts: Array<() => void> = [];
         items.forEach(([kind, name]) => {

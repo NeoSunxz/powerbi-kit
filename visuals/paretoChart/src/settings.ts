@@ -58,6 +58,20 @@ class LabelsCard extends FormattingSettingsCard {
     slices: Array<FormattingSettingsSlice> = [this.showValue, this.unit, this.showCumulative, this.showCallout];
 }
 
+export const AXIS_ITEMS = [
+    { value: "pct", displayName: "一把尺：只写百分比" },
+    { value: "dual", displayName: "两把尺：左边数值、右边百分比" }
+];
+
+// 默认两把尺：左边数值按最高的柱子取刻度，柱子画得高；右边百分比管累计折线和分界线。也能换回一把 0–100% 的尺
+class AxisCard extends FormattingSettingsCard {
+    mode = new formattingSettings.ItemDropdown({ name: "mode", displayName: "纵轴", items: AXIS_ITEMS, value: AXIS_ITEMS[1] });
+
+    name: string = "axis";
+    displayName: string = "纵轴";
+    slices: Array<FormattingSettingsSlice> = [this.mode];
+}
+
 class TextCard extends FormattingSettingsCard {
     useTheme = new formattingSettings.ToggleSwitch({ name: "useTheme", displayName: "颜色跟随报表主题", value: true });
     font = new formattingSettings.FontControl({
@@ -79,6 +93,7 @@ export class VisualFormattingSettingsModel extends FormattingSettingsModel {
     thresholdCard = new ThresholdCard();
     layoutCard = new LayoutCard();
     labelsCard = new LabelsCard();
+    axisCard = new AxisCard();
     textCard = new TextCard();
-    cards = [this.colorsCard, this.thresholdCard, this.layoutCard, this.labelsCard, this.textCard];
+    cards = [this.colorsCard, this.thresholdCard, this.layoutCard, this.labelsCard, this.axisCard, this.textCard];
 }

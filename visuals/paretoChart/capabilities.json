@@ -153,6 +153,24 @@
                 }
             }
         },
+        "axis": {
+            "properties": {
+                "mode": {
+                    "type": {
+                        "enumeration": [
+                            {
+                                "value": "pct",
+                                "displayName": "一把尺：只写百分比"
+                            },
+                            {
+                                "value": "dual",
+                                "displayName": "两把尺：左边数值、右边百分比"
+                            }
+                        ]
+                    }
+                }
+            }
+        },
         "text": {
             "properties": {
                 "useTheme": {
