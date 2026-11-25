@@ -3,7 +3,7 @@
 | 文件 | 是什么 |
 |---|---|
 | `calendar-heatmap.pbiviz` | 日历热力图组件（1.1.4，Power BI 里显示为「日历热力图 · NeoSun」），源码在 [visuals/calendarHeatmap](../visuals/calendarHeatmap) |
-| `dumbbell.pbiviz` | 哑铃图（1.0）：两个时间点的对比，源码在 [visuals/dumbbell](../visuals/dumbbell) |
+| `dumbbell.pbiviz` | 哑铃图（1.0.1）：两个时间点的对比，源码在 [visuals/dumbbell](../visuals/dumbbell) |
 | `waffle.pbiviz` | 华夫饼图（1.0）：10×10 格看占比，源码在 [visuals/waffle](../visuals/waffle) |
 | `rose-chart.pbiviz` | 南丁格尔玫瑰图（1.0）：一个类别一片花瓣，半径表示数值，源码在 [visuals/roseChart](../visuals/roseChart) |
 | `bullet-chart.pbiviz` | 子弹图（1.0）：实际 vs 目标的完成率，源码在 [visuals/bulletChart](../visuals/bulletChart) |

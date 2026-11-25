@@ -182,7 +182,11 @@ export class Visual implements IVisual {
         const band = (height - top - bottom) / rows.length;
 
         let d0 = s.layoutCard.zeroBased.value ? Math.min(0, lo) : lo, d1 = hi;
-        if (!s.layoutCard.zeroBased.value) { const pad = (hi - lo || Math.abs(hi) || 1) * 0.08; d0 = lo - pad; d1 = hi + pad; }
+        if (!s.layoutCard.zeroBased.value) {
+            // 两端各留 8% 的空，但数值都不小于 0 时，留白不越过 0（销售额这类数不会有负的刻度）
+            const pad = (hi - lo || Math.abs(hi) || 1) * 0.08;
+            d0 = lo >= 0 ? Math.max(0, lo - pad) : lo - pad; d1 = hi + pad;
+        }
         const x = d3.scaleLinear().domain([d0, d1]).nice(5).range([left, Math.max(left + 10, width - right)]);
 
         // 网格和坐标轴（下方）
